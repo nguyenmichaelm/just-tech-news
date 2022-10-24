@@ -56,13 +56,13 @@ User.init(
     // hooks aka lifecycle events
     hooks: {
       // set up beforeCreate lifecycle "hook" functionality
-      // to create password
+      // to create hash password before stored in database
       async beforeCreate(newUserData) {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
       // set up beforeUpdate lifecycle "hook" functionality
-      // to login
+      // to create new hash password before stored to database when user password is being updated  
       async beforeUpdate(updatedUserData) {
         updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
         return updatedUserData;
